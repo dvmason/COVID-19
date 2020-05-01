@@ -1,3 +1,7 @@
+*~
+/save
+index.js
+
 # changes file
 *.changes
 *.chg

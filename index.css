@@ -1,0 +1,50 @@
+#list {
+ overflow: auto;
+}
+.toggle {
+ display: inline-block;
+ height: 1.8ex;
+ width: 1.8ex;
+ background-color: #cccccc;
+}
+.open>.toggle {
+ background-image: url("open.png");
+}
+:not(.open)>.toggle {
+ background-image: url("closed.png");
+}
+.list1,.list2,.list3,.list4{
+ margin: 0;
+ padding: 1px;
+ border-width: 2px 0 0 0;
+}
+:not(.open)>.list3{display:none;}
+:not(.open)>.list4{display:none;}
+.list3{
+ margin: 0 0 0 26px;;
+}
+.list4{
+ margin: 0 0 0 52px;;
+}
+.heading{
+   height: 5%;
+   width: 100%;
+}
+.container{
+    display: flex;
+    width: 100%;
+    height: 95%
+}
+.fixed15{
+    width: 15%;
+}
+.flex{
+    flex-grow: 1;
+}
+.spaced{
+   margin: 2px;
+   padding: 0px;
+}
+.bordered{
+   border: 2px solid black;
+}
