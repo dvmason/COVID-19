@@ -1,16 +1,125 @@
-<document>
+<!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="index.css"/>
+
+    <!-- Place this data between the <head> tags of your website -->
+    <title>COVID-19 Country Curve Comparison</title>
+    <meta name="description" content="To make sense of 'Flatten the curve' it helps to be able to compare the curves from various countries. This lets you look at many countries simultaneously.">
+    <!-- Open Graph data -->
+    <meta property="og:title" content="COVID-19 Country Curve Comparison">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://covid.cs.ryerson.ca/compare/">
+    <meta property="og:image" content="https://covid.cs.ryerson.ca/compare/thumbnail.png">
+    <meta property="og:description" content="To make sense of 'Flatten the curve' it helps to be able to compare the curves from various countries. This lets you look at many countries simultaneously.">
+    <meta property="og:site_name" content="Ryerson School of Computer Science">
+    <meta property="article:published_time" content="2020-05-13T05:59:00+01:00">
+
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="COVID-19 Country Curve Comparison">
+    <meta itemprop="description" content="To make sense of 'Flatten the curve' it helps to be able to compare the curves from various countries. This lets you look at many countries simultaneously.">
+    <meta itemprop="image" content="https://covid.cs.ryerson.ca/compare/thumbnail.png">
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:site" content="@DrDavidMason">
+    <meta name="twitter:title" content="COVID-19 Country Curve Comparison">
+    <meta name="twitter:description" content="To make sense of 'Flatten the curve' it helps to be able to compare the curves from various countries. This lets you look at many countries simultaneously.">
+    <meta name="twitter:image:src" content="https://covid.cs.ryerson.ca/compare/thumbnail.png">
   </head>
   <body>
-    <div class="heading">
-      <a href="https://github.com/dvmason/COVID-19">Covid-19 Tracker</a> -
-      Developed with <a href="https://pharojs.org">PharoJS</a>
-    </div>
-    <div class="container">
-      <div class="fixed15 spaced bordered open" id="list"></div>
-      <div class="flex spaced bordered" id="graphs"></div>
+    <div id="page">
+      <div id="heading">
+        <p>
+          <a href="https://github.com/dvmason/COVID-19" target="_blank">Covid-19 Tracker</a> -
+          Developed with <a href="http://pharojs.org" target="_blank">PharoJS</a>
+        </p>
+      </div>
+      <div id="container">
+        <div id="display" class="fixed15 spaced bordered">
+          <div id="choices">
+            Sort by:
+            <select id="sortby" autofocus>
+              <option value="name">name</option>
+              <option value="population">population</option>
+              <optgroup label="Raw Numbers">
+                <option class="confirmed" value="confirmed">confirmed cases</option>
+                <option class="recovered" value="recovered">recovered</option>
+                <option class="deaths" value="deaths">deaths</option>
+              </optgroup>
+              <optgroup label="Per Capita">
+                <option class="confirmed" value="confirmedPerCap" selected>confirmed/million</option>
+                <option class="recovered" value="recoveredPerCap">recovered/million</option>
+                <option class="deaths" value="deathsPerCap">deaths/million</option>
+              </optgroup>
+            </select>
+            <br>
+            Show:
+            <div class="inline">
+              <input type="checkbox" id="confirmed" name="confirmed" checked value="checked">
+              <label for="confirmed" class="confirmed">confirmed cases</label>
+            </div>
+            <div class="inline">
+              <input type="checkbox" id="deaths" name="deaths" value="checked" checked>
+              <label for="deaths" class="deaths">deaths</label>
+            </div>
+            <div class="inline">
+              <input type="checkbox" id="recovered" name="recovered" checked>
+              <label for="recovered" class="recovered">recoveries</label>
+            </div>
+            <div class="inline">
+              <input type="checkbox" id="perCapita" name="perCapita" checked>
+              <label for="perCapita">per capita</label>
+            </div>
+            <div class="inline">
+              <input type="checkbox" id="cumulative" name="cumulative">
+              <label for="cumulative">cumulative</label>
+            </div>
+            <div class="inline">
+              <input type="checkbox" id="raw" name="raw" checked value="checked">
+              <label for="raw">smoothed</label>
+            </div>
+          </div>
+          <div class="open" id="list"><div id="Loading">
+              <p>Loading<br>up-to-date<br>data from<br>GitHub</p>
+          </div></div>
+        </div>
+        <div class="flex spaced" id="graphs"><div id="FAQ" class="heading">
+            <!--[if lt IE 11]>
+            <p style="color: red">
+              It appears you're running on a version of Internet Explorer less than 11. This page may not work at all.
+            <![endif]>
+            <![if IE 11]>
+            <p style="color: red">
+              It appears you're running on Internet Explorer 11. It is likely that this page won't work properly.
+            <![endif]-->
+            <p>
+              Click on any labels in the list to the left to show the graph for that region. Clicking again will remove it. (Clicking on any graph will also remove it.)
+            </p>
+            <p>
+              You can see multiple graphs at once to compare them. (Show the <a href="#" id="top9">top 9</a>/<a href="#" id="top16">top 16</a>/<a href="#" id="top25">top 25</a> regions in the list.)
+            </p>
+            <p>
+              You can choose the order to sort the list at the left using the select button at the top of the list.
+            </p>
+            <p>
+              You can use the checkboxes on the left to choose which datasets to display. You can also select raw/smoothed graphs. The smoothing is not perfect, but it helps show the shape of the curves, despite very eratic reporting in some juristictions.
+            </p>
+            <a href="http://pharojs.org" target="_blank">
+              <p><img style="width:20%;vertical-align:middle" alt="PharoJS Logo" src="pharoJsBicolorLogo2016-08-12.png">
+                Develop in Pharo Smalltalk, Run on Javascript</p></a>
+            <p>
+              Using <a href="https://github.com/CSSEGISandData/COVID-19/"> COVID-19 data from John Hopkins University</a> and <a href="">population data from the World Bank</a>.
+              Note that most of the death numbers are probably under-reported, <a href="https://www.economist.com/graphic-detail/2020/04/16/tracking-covid-19-excess-deaths-across-countries">as explained in this Economist article</a>.
+            </p>
+            <p>
+	      Written by: <a href="mailto:dmason@ryerson.ca">Dave Mason</a>
+            </p>
+            <p>
+              Inspired by <a href="https://covidcrt.uber.space/">Christian Haider's graphs</a> done using <a href="https://www.amber-lang.net/">Amber Smalltalk</a>.
+            </p>
+        </div></div>
+      </div>
     </div>
     <script src="index.js"></script>
   </body>
