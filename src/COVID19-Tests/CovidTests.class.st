@@ -78,3 +78,50 @@ CovidTests >> testParse [
 	self assert: (cov sorted at: 12) name equals: 'Jamaica and Islands'.
 
 ]
+
+{ #category : #tests }
+CovidTests >> testPercent [
+	| r |
+	r := CovRegion new.
+	self assert: (r percent: 1 of: 1) equals: 0.
+	self assert: (r percent: 1 of: 2) equals: -1.
+	self assert: (r percent: 2 of: 2) equals: 1.
+	self assert: (r percent: 1 of: 3) equals: -2.
+	self assert: (r percent: 2 of: 3) equals: 0.
+	self assert: (r percent: 3 of: 3) equals: 2.
+	self assert: (r percent: 1 of: 4) equals: -3.
+	self assert: (r percent: 2 of: 4) equals: -1.
+	self assert: (r percent: 3 of: 4) equals: 1.
+	self assert: (r percent: 4 of: 4) equals: 3.
+	self assert: (r percent: 1 of: 5) equals: -4.
+	self assert: (r percent: 2 of: 5) equals: -2.
+	self assert: (r percent: 3 of: 5) equals: 0.
+	self assert: (r percent: 4 of: 5) equals: 2.
+	self assert: (r percent: 5 of: 5) equals: 4.
+
+]
+
+{ #category : #tests }
+CovidTests >> testSmoothing [
+	| d |
+	d := CovDataset new.
+	d parse: #(5 5 5 5 10 10 10 10 10 10 50 50 50 50 50 50 100 150 200 200 200 300).
+	self assert: (d smoothed) equals: #(5 0 0 0 5 0 0 0 0 0 40 0 0 0 0 0 50 50 50 0 0 100).
+	d smooth: 2.
+	self assert: (d smoothed) equals: #(5 0 0 0 5 0 0 0 0 0 40 0 0 0 0 0 50 50 50 0 0 100).
+
+]
+
+{ #category : #tests }
+CovidTests >> testSmoothingBasic [
+	| d |
+	d := CovDataset new.
+	d parse: #(0 0 0 0 10).
+	self assert: (d smoothed) equals: #(0 0 0 0 10).
+	d smooth: 1.
+	self assert: (d smoothed) equals: #(0 0 0 5 5).
+	d raw.
+	d smooth: 2.
+	self assert: (d smoothed) equals: #(0 0 2 4 4).
+
+]
