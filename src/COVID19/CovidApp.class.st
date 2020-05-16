@@ -266,7 +266,7 @@ CovidApp >> resizeGraphs [
 	max := graphs inject: 0 into: [: maxSoFar : each | maxSoFar max: (each selection: selections;max) ].
 	max = 0 ifTrue: [ ^ self ].
 	step := 1.
-	selections & 16 = 0 ifTrue: [
+	(selections bitAnd: 16) = 0 ifTrue: [
 		[ step*10 < max ] whileTrue: [ step := step * 10 ].
 		[ max/step < 3 ] whileTrue: [ step := step / 2 ].
 		perCapita := nil
@@ -330,8 +330,8 @@ CovidApp >> setupElements [
 			bit := 2 raisedTo: index-1.
 			element checked ifTrue: [ selections := selections | bit ].
 			element addEventListener: #change block: [: ex |
-				selections := selections xor: bit.
-				(selections & 14) isZero ifTrue: [ (document getElementById: #confirmed) checked: true. selections := selections | 2 ].
+				selections := selections bitXor: bit.
+				(selections bitAnd: 14) isZero ifTrue: [ (document getElementById: #confirmed) checked: true. selections := selections | 2 ].
 				self resizeGraphs.
 	]]].
 

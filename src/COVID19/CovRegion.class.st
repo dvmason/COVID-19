@@ -175,7 +175,7 @@ CovRegion >> graph: largest step: step per: perCapita start: startDate from: fir
 	perCapita ifNil: [perCapitaString := ''.] ifNotNil: [ perCapitaString := ' per ',(perCapita = 1 ifTrue: [ 'capita' ] ifFalse: [ perCapita toLocaleString ])].
 	datasets := self selectedDatasets.
 	datasets do: [: dataset |
-		selection & 1 = 0 ifTrue: [ dataset raw ] ifFalse: [ dataset smooth ].
+		(selection bitAnd: 1) = 0 ifTrue: [ dataset raw ] ifFalse: [ dataset smooth ].
 	].
 	date := startDate.
 	self canvas.
@@ -183,7 +183,7 @@ CovRegion >> graph: largest step: step per: perCapita start: startDate from: fir
 	height := 0.95*graphHeight.
 	ctx clearRect: 0 y: 0 width: graphWidth height: graphHeight.
 	ctx textAlign: 'center'.
-	scale := selection & 16 ~= 0 ifTrue: [
+	scale := (selection bitAnd: 16) ~= 0 ifTrue: [
 		popScale ifNil: [
 				ctx fillStyle: #grey.
 				ctx font: 'italic small-caps bold 24px arial'.
@@ -212,7 +212,7 @@ CovRegion >> graph: largest step: step per: perCapita start: startDate from: fir
 			ctx fillText: date monthName x: monthPos y: graphHeight - 5
 		].
 		date := date addDays: 1.
-		selection & 32 = 0 ifTrue: [
+		(selection bitAnd: 32) = 0 ifTrue: [
 			datasets do: [: dataset | dataset day: index]
 		] ifFalse: [
 			datasets do: [: dataset | dataset daySum: index]
@@ -254,8 +254,8 @@ CovRegion >> last [
 { #category : #accessing }
 CovRegion >> max [
 	| max |
-	max := (self selectedDatasets collect: (selection & 32 = 0 ifTrue: [#max] ifFalse: [#sum])) max.
-	^ selection & 16 ~= 0 ifTrue: [
+	max := (self selectedDatasets collect: ((selection bitAnd: 32) = 0 ifTrue: [#max] ifFalse: [#sum])) max.
+	^ (selection bitAnd: 16) ~= 0 ifTrue: [
 			popScale ifNil: [ ^ 0 ] ifNotNil: [ ^ popScale * max ]
 		] ifFalse: [ ^ max ]
 
@@ -369,7 +369,7 @@ CovRegion >> selectedDatasets [
 	mask := 1.
 	^ {self confirmed. self deaths. self recovered} select: [: dataset |
 			mask := 2 * mask.
-			(dataset notNil and: [0 ~= (selection & mask)]) and: [ selection & 1 = 0 ifTrue: [ dataset raw ] ifFalse: [ dataset smooth ]. true ]
+			(dataset notNil and: [0 ~= (selection bitAnd: mask)]) and: [ (selection bitAnd: 1) = 0 ifTrue: [ dataset raw ] ifFalse: [ dataset smooth ]. true ]
 		]
 ]
 
