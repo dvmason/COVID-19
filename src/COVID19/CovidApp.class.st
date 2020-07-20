@@ -29,7 +29,7 @@ Class {
 	#pools : [
 		'CovGlobals'
 	],
-	#category : #COVID19
+	#category : #'COVID19-Kernel'
 }
 
 { #category : #description }

@@ -13,7 +13,7 @@ Class {
 		'TextDecoder',
 		'TextEncoder'
 	],
-	#category : #COVID19
+	#category : #'COVID19-Kernel'
 }
 
 { #category : #'code-critics' }

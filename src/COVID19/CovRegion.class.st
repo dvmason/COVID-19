@@ -32,7 +32,7 @@ Class {
 	#pools : [
 		'PjBrowserGlobals'
 	],
-	#category : #COVID19
+	#category : #'COVID19-Kernel'
 }
 
 { #category : #'class initialization' }

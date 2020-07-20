@@ -21,7 +21,7 @@ Class {
 		'CovGlobals',
 		'PjBrowserGlobals'
 	],
-	#category : #COVID19
+	#category : #'COVID19-Kernel'
 }
 
 { #category : #accessing }
@@ -168,6 +168,11 @@ CovDataset >> smooth: nnDays [
 	]].
 	smoothed := true.
 
+]
+
+{ #category : #'as yet unclassified' }
+CovDataset >> smoothed [
+	^ (1 to: data size) collect: [: i | (self day: i) asInteger ]
 ]
 
 { #category : #accessing }

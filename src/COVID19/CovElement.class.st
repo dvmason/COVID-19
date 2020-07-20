@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'style'
 	],
-	#category : #COVID19
+	#category : #'COVID19-Kernel'
 }
 
 { #category : #'pharoJs support' }
