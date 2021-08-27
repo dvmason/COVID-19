@@ -65,6 +65,18 @@ CovGlobals class >> getBoundingClientRect [
 ]
 
 { #category : #'code-critics' }
+CovGlobals class >> getContext: aString [
+	<pharoJsSkip>
+	" this is a dummy to appease the code critic "
+]
+
+{ #category : #'code-critics' }
+CovGlobals class >> getElementById: aString [
+	<pharoJsSkip>
+	" this is a dummy to appease the code critic "
+]
+
+{ #category : #'code-critics' }
 CovGlobals class >> getReader [
 	<pharoJsSkip>
 	" this is a dummy to appease the code critic "

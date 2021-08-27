@@ -70,12 +70,12 @@ CovidTests >> testDequote [
 { #category : #tests }
 CovidTests >> testParse [
 	cov parse: self rawDataGlobal as: #confirmed isUS: false.
-	self assert: cov countries size equals: 13.
+	self assert: cov countries size equals: 15.
 	self assert: ((cov countries at: 'Japan') confirmed raw day: 35) equals: 11.
 	self assert: ((cov countries at: 'Canada') confirmed raw day: 7) equals: 1.
 	self assert: (cov sorted at: 2) name equals: 'Canada'.
-	self assert: (cov sorted at: 11) name equals: 'Italy, Sicily, and Islands'.
-	self assert: (cov sorted at: 12) name equals: 'Jamaica and Islands'.
+	self assert: (cov sorted at: 13) name equals: 'Italy, Sicily, and Islands'.
+	self assert: (cov sorted at: 14) name equals: 'Jamaica and Islands'.
 
 ]
 

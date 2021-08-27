@@ -13,6 +13,11 @@ ManifestCOVID class >> ruleGRTemporaryNeitherReadNorWrittenRuleV1FalsePositive [
 ]
 
 { #category : #'code-critics' }
+ManifestCOVID class >> ruleLongMethodsRuleV1FalsePositive [
+	^ #(#(#(#RGMethodDefinition #(#CovDataset #smooth: #false)) #'2021-08-26T12:14:37.518257-04:00') #(#(#RGMethodDefinition #(#'CovidApp class' #initialize #true)) #'2021-08-26T13:09:24.217078-04:00') )
+]
+
+{ #category : #'code-critics' }
 ManifestCOVID class >> ruleRBBadMessageRuleV1FalsePositive [
 	^ #(#(#(#RGMethodDefinition #(#CovRegion #sortedBy: #false)) #'2020-05-01T13:53:37.183354-04:00') )
 ]

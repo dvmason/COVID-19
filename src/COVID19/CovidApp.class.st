@@ -52,6 +52,19 @@ CovidApp class >> initialize [
 	NormalizedNames at: 'Korea, Dem. People’s Rep.' put: 'Korea, North'.
 	NormalizedNames at: 'Korea, Rep.' put: 'Korea, South'.
 	NormalizedNames at: 'Russian Federation' put: 'Russia'.
+	NormalizedNames at: 'Bahamas, The' put: 'Bahamas'.
+	NormalizedNames at: 'Egypt, Arab Rep.' put: 'Egypt'.
+	NormalizedNames at: 'Gambia, The' put: 'Gambia'.
+	NormalizedNames at: 'Micronesia, Fed. Sts.' put: 'Micronesia'.
+	NormalizedNames at: 'Venezuela, RB' put: 'Venezuela'.
+	NormalizedNames at: 'American Samoa' put: 'Samoa'.
+	NormalizedNames at: 'Brunei Darussalam' put: 'Brunei'.
+	NormalizedNames at: 'Czech Republic' put: 'Czechia'.
+	NormalizedNames at: 'Kyrgyz Republic' put: 'Kyrgyzstan'.
+	NormalizedNames at: 'Slovak Republic' put: 'Slovakia'.
+	NormalizedNames at: 'St. Kitts and Nevis' put: 'Saint Kitts and Nevis'.
+	NormalizedNames at: 'St. Lucia' put: 'Saint Lucia'.
+	NormalizedNames at: 'St. Vincent and the Grenadines' put: 'Saint Vincent and the Grenadines'.
 
 ]
 
